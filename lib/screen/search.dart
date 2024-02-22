@@ -149,14 +149,19 @@ class _SearchPageState extends State<SearchScreen> {
                               ),
                               title: Center(
                                 child: Text(
-                                  "📍${valuex?[index]}",
+                                  "${valuex?[index]}",
                                   style: TextStyle(fontSize: 25),
                                 ),
                               ),
-                              trailing: Icon(
-                                Icons.delete,
-                                color: Colors.white,
-                                size: 30,
+                              trailing: GestureDetector(
+                                onTap: (){
+
+                                },
+                                child: Icon(
+                                  Icons.delete,
+                                  color: Colors.white,
+                                  size: 30,
+                                ),
                               ),
                             ),
                           ),

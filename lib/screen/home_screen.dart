@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final datetime = "${DateTime.now().hour}:${DateTime.now().minute}";
+
     final Size size = MediaQuery.of(context).size;
     return _connectionStatus.toString() == "ConnectivityResult.wifi" ||
         _connectionStatus.toString() == "ConnectivityResult.mobile"?
@@ -89,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   image: DecorationImage(
                       image: NetworkImage(
 
-                          "https://img.freepik.com/premium-vector/day-sun-weather-app-screen-mobile-interface-design-forecast-weather-background-time-concept-vector-banner_87946-3972.jpg"),
+                          "https://www.gadgetsnow.com/photo/95580479/95580479.jpg"),
                       fit: BoxFit.fill,
                       opacity: 0.4)),
               child: Scaffold(
@@ -208,29 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         const EdgeInsets.only(top: 20, right: 20, left: 20),
                         child: Column(
                           children: [
-                            Row(
-                              mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
 
-                              children: [
-                                Container(
-                                  margin: const EdgeInsets.all(5),
-                                  width: size.width/2.1,
-                                  padding: const EdgeInsets.all(15),
-                                  decoration: BoxDecoration(
-                                      color:
-                                      Colors.white.withOpacity(0.3),
-                                      borderRadius:
-                                      BorderRadius.circular(30)),
-                                  child: const Center(
-                                    child: Text(
-                                      "7 Days Forecast                   More Details >",
-                                      style: TextStyle(fontSize: 15),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
                             const SizedBox(
                               height: 20,
                             ),
@@ -345,7 +323,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Column(
                           children: [
                             const SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
+                             scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
@@ -355,34 +333,33 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   SizedBox(width: 10, height: 20),
                                   Text(
-                                    "24 - Hour Forecast                                       >",
+                                    "24 - Hour Forecast                     >",
                                     style: TextStyle(color: Colors.white),
                                   ),
+                                  const SizedBox(height: 10),
                                 ],
                               ),
                             ),
-                            const SizedBox(height: 20),
+
                             Container(
                               height: size.height/5,
 
                               child: ListView.separated(
                                 itemCount: 24,
-                                scrollDirection: Axis.horizontal,
                                 separatorBuilder: (context, index) {
                                   return const SizedBox(
-                                    width: 10,
+                                    width:25,
                                   );
                                 },
                                 itemBuilder: (context, index) {
                                   return Container(
                                     padding: const EdgeInsets.all(10),
                                     decoration: BoxDecoration(
-                                      borderRadius:
-                                      BorderRadius.circular(20),
+
                                       color: Colors.blue.withOpacity(0.3),
                                     ),
-                                    height: 70,
-                                    child: Column(
+                                    height: size.height/20,
+                                    child: Row(
                                       mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                       children: [
@@ -406,6 +383,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           height: 30,
                                           width: 30,
                                         ),
+                                        SizedBox(width:size.width/30,)
                                       ],
                                     ),
                                   );
@@ -417,141 +395,107 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     SliverToBoxAdapter(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            child: Column(
-                              children: [
-                                Container(
-                                  margin: const EdgeInsets.only(
-                                    left: 10,
-                                    bottom: 20,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: Colors.blueAccent
-                                        .withOpacity(0.3),
-                                    borderRadius:
-                                    BorderRadius.circular(100),
-                                  ),
-                                  height: 170,
-                                  width: 170,
-                                  child: Center(
-                                    child: Text(
-                                      "💨 Wind Speed : \n       ${wm?.timelines!.daily![0].values!.windSpeedAvg}km/h",
+                          Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Text(
+                              "💨 Wind Speed :         ${wm?.timelines!.daily![0].values!.windSpeedAvg}km/h",
+                              style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          SizedBox(height: size.height/30,),
+                          Center(
+                            child: RichText(
+                                textAlign: TextAlign.center,
+                                text: TextSpan(children: [
+                                  TextSpan(
+                                      text: DateFormat('🌅 HH:MM')
+                                          .format(wm
+                                          ?.timelines!
+                                          .daily![0]
+                                          .values!
+                                          .sunriseTime! ??
+                                          DateTime.now()),
                                       style: const TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  margin: const EdgeInsets.only(
-                                      left: 10, bottom: 10),
-                                  decoration: BoxDecoration(
-                                    color: Colors.blue.withOpacity(0.3),
-                                    borderRadius:
-                                    BorderRadius.circular(100),
-                                  ),
-                                  height: 170,
-                                  width: 170,
-                                  child: Center(
-                                      child: RichText(
-                                        textAlign: TextAlign.center,
-                                        text: TextSpan(children: [
-                                          TextSpan(
-                                              text: DateFormat('🌅 HH:MM')
-                                                  .format(wm
-                                                  ?.timelines!
-                                                  .daily![0]
-                                                  .values!
-                                                  .sunriseTime! ??
-                                                  DateTime.now()),
-                                              style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 20)),
-                                          const TextSpan(
-                                              text: " Sunrise\n",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 17,
-                                                  color: Colors.white)),
-                                          TextSpan(
-                                              text:
-                                              "\n${DateFormat('🌇 HH:MM').format(wm!.timelines!.daily![0].values!.sunsetTime ?? DateTime.now())}",
-                                              style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 20)),
-                                          const TextSpan(
-                                              text: " Sunset",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 17,
-                                                  color: Colors.white)),
-                                        ]),
-                                      )),
-                                ),
-                              ],
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20)),
+                                  const TextSpan(
+                                      text: " Sunrise\n",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 17,
+                                          color: Colors.white)),
+                                  TextSpan(
+                                      text:
+                                      "\n${DateFormat('🌇 HH:MM').format(wm!.timelines!.daily![0].values!.sunsetTime ?? DateTime.now())}",
+                                      style: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20)),
+                                  const TextSpan(
+                                      text: " Sunset",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 17,
+                                          color: Colors.white)),
+                                  ])
                             ),
+
                           ),
-                          Container(
-                            height: 360,
-                            margin: const EdgeInsets.only(right: 10),
-                            width:
-                            (MediaQuery.of(context).size.width / 2) -
-                                20,
-                            decoration: BoxDecoration(
-                              color: Colors.blue.withOpacity(0.3),
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  ListTile(
-                                    title: const Text("Humidity"),
-                                    trailing: Text(
-                                        "${wm?.timelines!.daily![0].values!.humidityAvg}%"),
-                                  ),
-                                  ListTile(
-                                    title: const Text("Rain Intensity"),
-                                    trailing: Text(
-                                        "${wm?.timelines!.daily![0].values!.rainIntensityAvg}"),
-                                  ),
-                                  ListTile(
-                                    title: const Text("Weaker (UV)"),
-                                    trailing: Text(
-                                        "${wm?.timelines!.daily![0].values!.uvHealthConcernAvg}"),
-                                  ),
-                                  ListTile(
-                                    title: const Text("Air Pressure"),
-                                    trailing: Text(
-                                        "${wm?.timelines!.daily![0].values!.pressureSurfaceLevelAvg}hPa"),
-                                  ),
-                                  ListTile(
-                                    title: const Text("Chance of rain"),
-                                    trailing: Text(
-                                        "${wm?.timelines!.daily![0].values!.rainAccumulationLweMax} %"),
-                                  ),
-                                  ListTile(
-                                    title: const Text("Feels like"),
-                                    trailing: Text(
-                                        " ${wm?.timelines!.daily![2].values!.temperatureMax}ºC"),
-                                  ),
-                                ],
-                              ),
-                            ),
+                          SizedBox(height: size.height/20,),
+                Container(
+
+                  margin: const EdgeInsets.only(right: 10),
+
+                  child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          ListTile(
+                            title: const Text("Humidity",style: TextStyle(fontSize: 20),),
+                            trailing: Text(
+                                "${wm?.timelines!.daily![0].values!.humidityAvg}%",style: const TextStyle(fontSize: 20)),
                           ),
+                          ListTile(
+                            title: const Text("RainIntensity",style: TextStyle(fontSize: 20)),
+                            trailing: Text(
+                                "${wm?.timelines!.daily![0].values!.rainIntensityAvg}",style: const TextStyle(fontSize: 20)),
+                          ),
+                          ListTile(
+                            title: const Text("Weaker(UV)",style: TextStyle(fontSize: 20)),
+                            trailing: Text(
+                                "${wm?.timelines!.daily![0].values!.uvHealthConcernAvg}",style: const TextStyle(fontSize: 20)),
+                          ),
+                          ListTile(
+                            title: const Text("AirPressure",style: TextStyle(fontSize: 20)),
+                            trailing: Text(
+                                "${wm?.timelines!.daily![0].values!.pressureSurfaceLevelAvg}hPa",style: const TextStyle(fontSize: 20)),
+                          ),
+                          ListTile(
+                            title: const Text("RainChance"),
+                            trailing: Text(
+                                "${wm?.timelines!.daily![0].values!.rainAccumulationLweMax} %",style: const TextStyle(fontSize: 20)),
+                          ),
+                          ListTile(
+                            title: const Text("Feelslike",style: TextStyle(fontSize: 20)),
+                            trailing: Text(
+                                " ${wm?.timelines!.daily![2].values!.temperatureMax}ºC",style: const TextStyle(fontSize: 20)),
+                          ),
+
+                          SizedBox(height: size.height/40,)
                         ],
-                      ),
+                      )
                     ),
 
-                  ],
+                )],
                 ),
               ),
-            ))
-            : const Center(
+              ]))
+            )): const Center(
           child: CircularProgressIndicator(),
         )
     ):const SafeArea(child: Scaffold(
@@ -566,8 +510,7 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.blueAccent),
         ),
       ),
-    ),)
-    ;
+    ),);
   }
 
 
